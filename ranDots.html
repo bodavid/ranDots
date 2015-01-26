@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+</head>
+<body onload="encodeDotsStart();">
+<div  style="width: 100%; margin: 0 auto;">
+<div>
+    <h3 style="text-align: center;">Random Dots encodings</h3>
+</div>
+
+<div>
+    <canvas id="cLeft" width="50" height="50" style="border:1px solid graytext; background-color: white; width: 500px; height: 500px">Your browser does not support the HTML5 canvas tag.</canvas>
+    <canvas id="cRight" width="50" height="50" style="border:1px solid graytext; background-color: white; width: 500px; height: 500px">Your browser does not support the HTML5 canvas tag.</canvas>
+</div>
+
+<div>
+    <hr>
+    Made in Stockholm 2015 01 24
+</div>
+
+</div>
+</body>
+</html>
+<script src="ranDots.js"></script>
+
+<script>
+    function encodeDotsStart() {
+      var myRDleft = new RanDots();
+      myRDleft.plotElem = 'cLeft';
+      myRDleft.initImage();
+      myRDleft.makeImageData();
+
+      myRDleft.plot2D();
+
+      var myRDright = new RanDots();
+      myRDright.plotElem = 'cRight';
+      myRDright.initImage();
+      myRDright.imgData = myRDleft.imgData;
+      myRDright.plot2D();
+
+      var orgImage = myRDleft.ctx.getImageData(0, 0, myRDleft.c.width, myRDleft.c.height);
+
+      //Shift parts
+//      myRDleft.copyRect(20, 20, 10, 10, 17, 20)
+
+      myRDright.copyRect(20, 20, 10, 10, 23, 20)
+
+      setTimeout(function() {
+        myRDleft.imgData = orgImage;
+        //myRDleft.plot2D();
+        console.log("redraw");
+      }, 5000);
+
+    }
+</script>
+
